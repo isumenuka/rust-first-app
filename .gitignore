@@ -1,0 +1,4 @@
+/target
+
+# Holds API tokens; never commit it.
+.mcp.json

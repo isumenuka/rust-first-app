@@ -1,0 +1,29 @@
+[package]
+name = "rust_first_app"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+description = "My first Rust web app: a tiny to-do list served with axum."
+publish = false
+
+[dependencies]
+anyhow = "1"
+axum = "0.8"
+serde = { version = "1", features = ["derive"] }
+thiserror = "2"
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "net", "sync", "signal"] }
+
+[dev-dependencies]
+http-body-util = "0.1"
+serde_json = "1"
+tower = { version = "0.5", features = ["util"] }
+
+# Lint setup from Apollo's Rust best practices, chapter 2.5.
+# Groups get a lower priority so individual lints can override them.
+[lints.rust]
+future_incompatible = { level = "warn", priority = -1 }
+nonstandard_style = { level = "deny", priority = -1 }
+
+[lints.clippy]
+all = { level = "deny", priority = -1 }
+pedantic = { level = "warn", priority = -1 }
