@@ -12,11 +12,24 @@ axum = "0.8"
 serde = { version = "1", features = ["derive"] }
 thiserror = "2"
 tokio = { version = "1", features = ["macros", "rt-multi-thread", "net", "sync", "signal"] }
+tower = "0.5"
+vercel_runtime = { version = "2", features = ["axum"] }
 
 [dev-dependencies]
 http-body-util = "0.1"
 serde_json = "1"
 tower = { version = "0.5", features = ["util"] }
+
+# Local server: `cargo run --bin rust_first_app` (src/main.rs is found automatically).
+# Vercel Function: Vercel builds every `[[bin]]` whose path is inside api/.
+[[bin]]
+name = "app"
+path = "api/app.rs"
+
+[profile.release]
+codegen-units = 1
+lto = "fat"
+opt-level = 3
 
 # Lint setup from Apollo's Rust best practices, chapter 2.5.
 # Groups get a lower priority so individual lints can override them.
